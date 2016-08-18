@@ -41,12 +41,13 @@ const DynamicForm = Ember.Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-    let schemaObj = this._initSchema(get(this, 'schema'));
-    let schemaWithData = this._processData(schemaObj);
-    let schemaWithPostRender = this._buildPostRender(schemaWithData);
-    let schemaWithActions = this._addActions(schemaWithPostRender);
-    let filteredSchema = this._processFilters(schemaWithActions);
-    let mappedSchema = this._replaceKeywordsWithFunctions(filteredSchema);
+    let mappedSchema = _.chain(get(this, 'schema'))
+      .thru(this._initSchema)
+      .thru(this._processData)
+      .thru(this._buildPostRender)
+      .thru(this._addActions)
+      .thru(this._processFilters)
+      .thru(this._replaceKeywordsWithFunctions);
     set(this, 'renderSchema', mappedSchema);
   },
 
