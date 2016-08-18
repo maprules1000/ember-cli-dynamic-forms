@@ -58,7 +58,7 @@ const DynamicForm = Ember.Component.extend({
     let postRenderFns = [];
     if (get(this, 'changeAction')) {
       let fields = Object.keys(schemaObj.schema.properties);
-      let changeAction = this.get('changeAction');
+      let changeAction = get(this, 'changeAction');
       let changeFn = function (control) {
         fields.forEach((field) => {
           control.childrenByPropertyId[field].on('keyup', function (e) {
@@ -72,7 +72,7 @@ const DynamicForm = Ember.Component.extend({
       postRenderFns.push(changeFn);
     }
     if (get(this, 'postRender')) {
-      postRenderFns.push(this.get('postRender'));
+      postRenderFns.push(get(this, 'postRender'));
     }
 
     if (postRenderFns.length > 0) {
@@ -88,7 +88,7 @@ const DynamicForm = Ember.Component.extend({
   },
 
   _addActions(schemaObj) {
-    return _.reduce(this.get('formActions'), (result, value, key) => {
+    return _.reduce(get(this, 'formActions'), (result, value, key) => {
       if ((((((result || {}).options || {}).form || {}).buttons || {})[key])) {
         result.options.form.buttons[key].click = value;
       }
@@ -114,12 +114,12 @@ const DynamicForm = Ember.Component.extend({
   },
 
   _processData(schemaObj) {
-    if (this.get('data') && Ember.typeOf(this.get('data')) === 'object') {
+    if (get(this, 'data') && Ember.typeOf(get(this, 'data')) === 'object') {
       schemaObj.data = this.get('data');
-    } else if (this.get('data') && Ember.typeOf(this.get('data')) === 'instance') {
+    } else if (get(this, 'data') && Ember.typeOf(get(this, 'data')) === 'instance') {
       let keys = Object.keys(schemaObj.schema.properties);
       let dataObj = _.reduce(keys, (data, key) => {
-        data[key] = this.get('data').get(key);
+        data[key] = get(this, 'data').get(key);
         return data;
       }, {});
       schemaObj.data = dataObj;
