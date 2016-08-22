@@ -52,6 +52,7 @@ const DynamicForm = Ember.Component.extend({
       _.curry(this._replaceKeywordsWithFunctions)(getOwner(this))
     ]);
     debugger;
+    this.set('schema').view = "web-create";
     set(this, 'renderSchema', buildSchema(get(this, 'schema')));
   },
 
@@ -67,6 +68,10 @@ const DynamicForm = Ember.Component.extend({
       return JSON.parse(schema);
     }
     return _.clone(schema, true);
+  },
+
+  _setView() {
+
   },
 
   _processData(formData, schemaObj) {
