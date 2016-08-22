@@ -6,7 +6,7 @@
     "ember-cli-test-loader": "0.2.2",
     "jquery": "1.11.3",
     "alpaca": "1.5.14",
-    "bootstrap": "3.3.2",
+
     "lodash": "~4.6.1"
   },
   "resolutions": {
