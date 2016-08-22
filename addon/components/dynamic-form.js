@@ -51,6 +51,7 @@ const DynamicForm = Ember.Component.extend({
       _.curry(this._processFilters)(getOwner(this)),
       _.curry(this._replaceKeywordsWithFunctions)(getOwner(this))
     ]);
+    debugger;
     set(this, 'renderSchema', buildSchema(get(this, 'schema')));
   },
 
